@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { MapsComponent } from "./MapComponent";
+import { LocationContext } from "./contexts/location-context";
+import { Coordinates } from "./actions/request-address";
+import { Location } from "./Location";
+import { ResultContext, Result } from "./contexts/result-context";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [loc, setLoc] = React.useState(undefined as undefined | Coordinates);
+    const [results, setResults] = React.useState([] as Result[]);
+
+    return (
+        <ResultContext.Provider value={[results, setResults]}>
+            <LocationContext.Provider value={[loc, setLoc]}>
+                <div className="App">
+                    <Location />
+                    <MapsComponent />
+                </div>
+            </LocationContext.Provider>
+        </ResultContext.Provider>
+    );
 }
 
 export default App;
