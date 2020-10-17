@@ -30,7 +30,7 @@ export const AddressLookup = () => {
             </label>
         </form>
         <p>
-            {coords}
+            {`${coords.lat}, ${coords.lng}`}
         </p>
         </div>
     )
