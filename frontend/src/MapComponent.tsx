@@ -29,14 +29,14 @@ export const MapsComponent = () => {
     // const onUnmount = () => setMap(null)
 
     return (
-        <LoadScript googleMapsApiKey={process.env.GOOGLE_API_KEY!!}>
+        <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY!!}>
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}
-                zoom={12}
+                zoom={14}
                 >
                     <Marker position={glenn} />
-                </GoogleMap>
+            </GoogleMap>
         </LoadScript>
     )
 }
