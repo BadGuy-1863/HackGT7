@@ -9,12 +9,17 @@ export const Geolocation = () => {
     }
 
     const handleClick = () => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            setLoc({
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-            });
-        });
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                setLoc({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                });
+            },
+            () => {
+                window.alert("Could not get location, enter address manually");
+            }
+        );
     };
 
     return <button onClick={handleClick}> Get Location </button>;
