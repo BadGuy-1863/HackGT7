@@ -1,14 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
 import { MapsComponent } from "./MapComponent";
-import { AddressLookup } from './LookupComponent';
+import { LocationContext } from "./location-context";
+import { Coordinates } from "./request-address";
+import { Location } from "./Location";
 
 function App() {
-  return (
-    <div className="App">
-      <MapsComponent />
-      {/* <header className="App-header">
+    const [loc, setLoc] = React.useState(undefined as undefined | Coordinates);
+
+    return (
+        <LocationContext.Provider value={[loc, setLoc]}>
+            <div className="App">
+                {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
@@ -23,9 +27,11 @@ function App() {
         </a>
 
       </header> */}
-      <AddressLookup />
-    </div>
-  );
+                <Location />
+                <MapsComponent />
+            </div>
+        </LocationContext.Provider>
+    );
 }
 
 export default App;
