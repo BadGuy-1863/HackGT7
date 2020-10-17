@@ -1,11 +1,11 @@
 import React from "react"
 
-import { requestCoordinates } from "./request-address";
+import { requestCoordinates, Coordinates } from "./request-address";
 
 
 export const AddressLookup = () => {
     const [address, setAddress] = React.useState("")
-    const [coords, setCoords] = React.useState("None")
+    const [coords, setCoords] = React.useState({} as Coordinates)
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault()

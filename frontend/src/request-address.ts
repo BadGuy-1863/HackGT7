@@ -2,7 +2,12 @@ import axios from "axios";
 
 const processAddress = (address : string) => encodeURI(address)
 
-export const requestCoordinates = async (address: string) => {
+export interface Coordinates {
+    lat: number,
+    lng: number
+}
+
+export const requestCoordinates = async (address: string): Promise<Coordinates | undefined>  => {
     const baseURL = "https://maps.googleapis.com/maps/api/geocode/json"
 
     const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
