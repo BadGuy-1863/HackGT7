@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
-import { requestCoordinates, Coordinates } from "../request-address";
-import { LocationContext } from "../location-context";
+import { requestCoordinates, Coordinates } from "../actions/request-address";
+import { LocationContext } from "../contexts/location-context";
 
 export const AddressLookup = () => {
     const [loc, setLoc] = useContext(LocationContext);

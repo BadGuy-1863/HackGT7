@@ -1,5 +1,5 @@
 import React from "react";
-import { LocationContext } from "../location-context";
+import { LocationContext } from "../contexts/location-context";
 
 export const Geolocation = () => {
     const [loc, setLoc] = React.useContext(LocationContext);
