@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { MapsComponent } from "./MapComponent";
+import { AddressLookup } from './LookupComponent';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         </a>
 
       </header> */}
+      <AddressLookup />
     </div>
   );
 }

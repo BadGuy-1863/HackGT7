@@ -29,7 +29,7 @@ export const MapsComponent = () => {
     // const onUnmount = () => setMap(null)
 
     return (
-        <LoadScript googleMapsApiKey={process.env.GOOGLE_API_KEY!!}>
+        <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY!!}>
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}
