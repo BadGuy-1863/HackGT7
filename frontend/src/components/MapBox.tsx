@@ -1,8 +1,8 @@
 import React from "react";
 import { Store } from "../actions/nearby-wait-time";
 import { Duration } from "../duration";
-import { MapsComponent } from "./MapComponent";
-import ResultList from "./ResultList";
+import { MapsComponent } from "./MapBox/MapComponent";
+import ResultList from "./MapBox/ResultList";
 import "./MapBox.scss";
 
 const MapBox = (props: any) => {

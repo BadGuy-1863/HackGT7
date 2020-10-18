@@ -1,5 +1,5 @@
 import React from "react";
-import { Store } from "../../actions/nearby-wait-time";
+import { Store } from "../../../actions/nearby-wait-time";
 import "./ListEntry.scss";
 
 interface Props {
