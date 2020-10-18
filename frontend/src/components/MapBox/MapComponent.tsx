@@ -1,7 +1,7 @@
 import React from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
-import { LocationContext } from "../contexts/location-context";
-import { ResultContext } from "../contexts/result-context";
+import { LocationContext } from "../../contexts/location-context";
+import { ResultContext } from "../../contexts/result-context";
 import "./MapComponent.scss";
 
 const containerStyle = {

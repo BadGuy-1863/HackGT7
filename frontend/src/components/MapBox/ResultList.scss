@@ -1,5 +1,5 @@
 .resultlist__container {
-    flex: 1;
+    // flex: 1;
     display: flex;
     justify-content: center;
     padding: 20px;
@@ -7,5 +7,6 @@
         // display: inline-block;
         background: #efefef;
         padding: 40px;
+        min-width: 120px;
     }
 }
