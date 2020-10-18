@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
-import { requestCoordinates, Coordinates } from "../actions/request-address";
-import { LocationContext } from "../contexts/location-context";
+import { requestCoordinates, Coordinates } from "../../actions/request-address";
+import { LocationContext } from "../../contexts/location-context";
 
 export const AddressLookup = () => {
     const [loc, setLoc] = useContext(LocationContext);
@@ -23,21 +23,21 @@ export const AddressLookup = () => {
     };
 
     const getRadius = (value: number, index: number) => {
-        return `${value}`
-    }
+        return `${value}`;
+    };
 
     return (
         <div className="address-form">
+            Alternatively, enter your current address:
             <form onSubmit={handleSubmit}>
-                <label htmlFor="address">Address:</label> 
                 <input
                     type="text"
                     value={address}
                     onChange={handleChange}
+                    className="addressInput"
                 />
-                <input type="submit"/>
+                <input type="submit" className="button" />
             </form>
-            {loc && `Your coords: ${loc.lat}, ${loc.lng}`}
         </div>
     );
 };

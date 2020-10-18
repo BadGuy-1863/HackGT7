@@ -1,8 +1,9 @@
-import React, {useContext} from 'react'
-import './Title.scss'
+import React, { useContext } from "react";
+import "./Title.scss";
 import { LocationContext } from "../contexts/location-context";
 import { ResultContext } from "../contexts/result-context";
-import {AddressLookup} from '../Location/LookupComponent'
+import { AddressLookup } from "./Location/LookupComponent";
+import { Location } from "./Location";
 
 const Title = (props: any) => {
     const [loc] = useContext(LocationContext);
@@ -17,14 +18,19 @@ const Title = (props: any) => {
     //     )
     // }
     return (
-        <div className='title-box'>
-            <h1>Squiggle</h1>
-            <h2>Lines are for losers.</h2>
-            <div className = "address-lookup">
-                <AddressLookup />
+        <div className="title-box">
+            <div className="title">
+                <h1>Squiggle</h1>
+                <h2>Lines are for losers.</h2>
+            </div>
+            <div className="search-box">
+                <br />
+                <div className="address-lookup">
+                    <Location />
+                </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Title;

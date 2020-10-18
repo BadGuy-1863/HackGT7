@@ -1,7 +1,7 @@
 import React from "react";
 import { Store } from "./actions/nearby-wait-time";
 import { Coordinates } from "./actions/request-address";
-import "./App.css";
+import "./App.scss";
 import AppFooter from "./components/AppFooter";
 import { LocationContext } from "./contexts/location-context";
 import { ResultContext } from "./contexts/result-context";
