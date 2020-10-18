@@ -1,12 +1,16 @@
 import React from "react";
+import {Link} from "react-router-dom";
+import "./About.scss"
 
 export const Terms = () => {
     return (
         <div className="terms">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-            fugit amet illum aspernatur quisquam necessitatibus placeat
-            explicabo totam eius! Corporis deserunt delectus libero rerum nihil
-            fugiat quas aspernatur totam dolores?
+            <Link to="/" style={{textDecoration:'none', color:"black"}}>
+                <h1>Terms & Conditions</h1>
+            </Link>
+            <p>
+                This is our website. Do not use it for nefarious purposes. Please.
+            </p>
         </div>
     );
 };

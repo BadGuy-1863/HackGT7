@@ -19,27 +19,25 @@ function App() {
 
     return (
         <Router>
-            <RadiusContext.Provider value={[radius, setRadius]}>
-                <ResultContext.Provider value={[results, setResults]}>
-                    <LocationContext.Provider value={[loc, setLoc]}>
-                        <div className="App">
-                            <Title />
-                            <Switch>
-                                <Route path="/terms">
-                                    <Terms />
-                                </Route>
-                                <Route path="/about">
-                                    <About />
-                                </Route>
-                                <Route path="/">
-                                    <MapBox />
-                                    <AppFooter />
-                                </Route>
-                            </Switch>
-                        </div>
-                    </LocationContext.Provider>
-                </ResultContext.Provider>
-            </RadiusContext.Provider>
+            <ResultContext.Provider value={[results, setResults]}>
+                <LocationContext.Provider value={[loc, setLoc]}>
+                    <div className="App">
+                        <Switch>
+                            <Route path="/terms">
+                                <Terms />
+                            </Route>
+                            <Route path="/about">
+                                <About />
+                            </Route>
+                            <Route path="/">
+                                <Title />
+                                <MapBox />
+                                <AppFooter />
+                            </Route>
+                        </Switch>
+                    </div>
+                </LocationContext.Provider>
+            </ResultContext.Provider>
         </Router>
     );
 }

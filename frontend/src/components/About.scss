@@ -1,0 +1,30 @@
+body {
+    background-color: rgb(75, 75, 75);
+}
+
+p {
+    margin: 0 auto;
+    color: white;
+    width: 600px;
+    font-size: 24px;
+    font-weight: bold;
+}
+h1 {
+    color: white;
+    font-weight: 500;
+    font-size: 6vw;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.about {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.terms {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}

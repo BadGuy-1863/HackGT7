@@ -6,14 +6,13 @@ import { Link } from "react-router-dom";
 const AppFooter = () => {
     return (
         <div className="footer">
-            <div className="Links">
-                {/* <a href="a">About</a> */}
+            <div>
                 <Link to="/about">About</Link>
-                <br />
-                {/* <a href="tc">Terms &amp; Conditions</a> */}
+            </div>
+            <div>
                 <Link to="/terms">Terms &amp; Conditions</Link>
             </div>
-            <div className="powered-by">
+            <div className='powered-by'>
                 Powered by
                 <img src={ncr} alt="ncr logo" />
             </div>
