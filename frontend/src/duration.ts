@@ -36,7 +36,7 @@ export class Duration {
     }
 
     toString(): string {
-        return `${this.hours()}:${this.minutes}:${this.seconds()}`;
+        return `${this.hours()}:${this.minutes()}:${this.seconds()}`;
     }
 
     add(other: Duration) {
