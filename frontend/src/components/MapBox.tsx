@@ -3,6 +3,8 @@ import { Store } from "../actions/nearby-wait-time";
 import { Duration } from "../duration";
 import { MapsComponent } from "./MapComponent";
 import ResultList from "./ResultList";
+import "./MapBox.scss";
+
 const MapBox = (props: any) => {
     const data: Store[] = [
         {
@@ -15,6 +17,10 @@ const MapBox = (props: any) => {
                 street: "250 North Avenue",
             },
             waitTime: Duration.fromStr("00:13:00"),
+            coordinates: {
+                lat: 34,
+                lng: -86,
+            },
         },
         {
             storeId: "2",
@@ -26,11 +32,15 @@ const MapBox = (props: any) => {
                 street: "250 North Avenue",
             },
             waitTime: Duration.fromStr("00:13:00"),
+            coordinates: {
+                lat: 34,
+                lng: -86,
+            },
         },
     ];
 
     return (
-        <div>
+        <div className="map-box">
             <MapsComponent />
             <ResultList locations={data} />
         </div>

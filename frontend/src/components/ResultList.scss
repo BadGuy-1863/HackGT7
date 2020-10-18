@@ -1,0 +1,11 @@
+.resultlist__container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    .resultlist {
+        // display: inline-block;
+        background: #efefef;
+        padding: 40px;
+    }
+}

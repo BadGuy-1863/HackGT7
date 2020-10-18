@@ -2,6 +2,7 @@ import React from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { LocationContext } from "../contexts/location-context";
 import { ResultContext } from "../contexts/result-context";
+import "./MapComponent.scss";
 
 const containerStyle = {
     width: "400px",
@@ -18,7 +19,6 @@ const center = {
 //     lng: -84.391693
 // }
 
-// @ts-ignore
 export const MapsComponent = () => {
     // const [map, setMap] = React.useState(null);
 
@@ -30,18 +30,25 @@ export const MapsComponent = () => {
 
     // const onUnmount = () => setMap(null)
 
-    const [loc, setLoc] = React.useContext(LocationContext);
+    const [loc] = React.useContext(LocationContext);
     const [results] = React.useContext(ResultContext);
 
     return (
-        <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY!!}>
-            <GoogleMap
-                mapContainerStyle={containerStyle}
-                center={loc ?? center}
-                zoom={14}
+        <div className="map-container">
+            <LoadScript
+                googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY!!}
             >
-                {loc && <Marker position={loc} />}
-            </GoogleMap>
-        </LoadScript>
+                <GoogleMap
+                    mapContainerStyle={containerStyle}
+                    center={loc ?? center}
+                    zoom={14}
+                >
+                    {results &&
+                        results.map(({ storeId, coordinates }) => (
+                            <Marker key={storeId} position={coordinates} />
+                        ))}
+                </GoogleMap>
+            </LoadScript>
+        </div>
     );
 };
