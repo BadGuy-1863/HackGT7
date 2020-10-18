@@ -1,12 +1,7 @@
 import React, { createContext } from "react";
-
-export interface Result {
-    store_id: string;
-    wait_time: string;
-    address: string;
-}
+import { Store } from "../actions/nearby-wait-time";
 
 export const ResultContext = createContext([[], () => {}] as [
-    Result[],
-    React.Dispatch<React.SetStateAction<Result[]>>
+    Store[],
+    React.Dispatch<React.SetStateAction<Store[]>>
 ]);
