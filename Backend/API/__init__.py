@@ -37,19 +37,21 @@ def create_app(test_config=None):
             with conn.cursor() as cursor:
                 cursor.execute("SELECT QueueTime FROM Merchant WHERE Merchant_ID = '%s';"%str(store_id))
                 row = cursor.fetchone()
-                return(str(row[0]))
+                if row is not None:
+                    return(str(row[0]))
 
     def get_num_in_progress(store_id):
         headers = {
          'content-type': 'application/json',
+         'accept': 'application/json',
          'nep-organization': '3feaeb2481a64df9b1953945990c7eae',
-         'nep-enterprise-unit': store_id,
          'date': "2020-10-17T15:38:41.769Z"
         }
-        payload = "{\n    \"searchCriteria\": {\n       \"status\": \"InProgress\"\n    },\n    \"operator\": \"AND\",\n    \"pageStart\": 0,\n    \"pageSize\": 100\n}"
+        payload = "{\n \"status\": \"InProgress\",\n \"enterpriseUnitId\": \"%s\"}"%(str(store_id))
         url = 'https://gateway-staging.ncrcloud.com/order/orders/find'
         resp = requests.request("POST",url, headers=headers, auth=('c1550d69-8a76-43ad-b0cf-1b3b06cc6546', '@8askate'), data = payload)
-        return resp.json()["totalResults"]
+        return [o['enterpriseUnitId'] for o in resp.json()['orders']].count(store_id)
+
     app = Flask(__name__, instance_relative_config=True)
 
     means = {}
@@ -60,7 +62,7 @@ def create_app(test_config=None):
          'nep-enterprise-unit': store_id,
          'date': "2020-10-17T15:38:41.769Z"
         }
-        payload = "{\n    \"searchCriteria\": {\n       \"status\": \"Finished\"\n, \"enterpriseUnitID\": \"%s\"\n     },\n    \"operator\": \"AND\",\n    \"pageStart\": 0,\n    \"pageSize\": 100\n}"%str(store_id)
+        payload = "{\n    \"criteria\": {\n       \"status\": \"Finished\"\n, \"enterpriseUnitID\": \"%s\"\n     },\n    \"operator\": \"AND\",\n    \"pageStart\": 0,\n    \"pageSize\": 100\n}"%str(store_id)
         url = 'https://gateway-staging.ncrcloud.com/order/orders/find'
         resp = requests.request("POST",url, headers=headers, auth=('c1550d69-8a76-43ad-b0cf-1b3b06cc6546', '@8askate'), data = payload)
         means[str(store_id)] = 5
@@ -80,7 +82,6 @@ def create_app(test_config=None):
                 ids = cursor.fetchall()
                 for sid in ids:
                     store_id = sid[0]
-                    print(store_id)
                     cursor.execute("UPDATE Merchant SET QueueTime = '%s' WHERE Merchant_ID = '%s';"%(update_time(store_id), store_id))
 
     sched = BackgroundScheduler(daemon=True)
