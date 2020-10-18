@@ -33,10 +33,10 @@ export const MapsComponent = () => {
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}
-                zoom={12}
+                zoom={14}
                 >
                     <Marker position={glenn} />
-                </GoogleMap>
+            </GoogleMap>
         </LoadScript>
     )
 }

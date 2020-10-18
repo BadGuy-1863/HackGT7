@@ -7,6 +7,9 @@ import { Coordinates } from "./actions/request-address";
 import { Location } from "./Location";
 import { ResultContext, Result } from "./contexts/result-context";
 
+import Title from './Title'
+import MapBox from './MapBox'
+import AppFooter from './AppFooter'
 function App() {
     const [loc, setLoc] = React.useState(undefined as undefined | Coordinates);
     const [results, setResults] = React.useState([] as Result[]);
@@ -14,6 +17,9 @@ function App() {
     return (
         <ResultContext.Provider value={[results, setResults]}>
             <LocationContext.Provider value={[loc, setLoc]}>
+                <Title />
+                <MapBox />
+                <AppFooter />
                 <div className="App">
                     <Location />
                     <MapsComponent />
