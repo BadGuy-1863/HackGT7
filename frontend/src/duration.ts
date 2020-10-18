@@ -27,7 +27,7 @@ export class Duration {
      */
     static fromStr(durationStr: string): Duration {
         const segs = durationStr.split(":").map((i) => Number(i));
-        if (segs.length == 0) throw "Invalid String";
+        if (segs.length === 0) throw "Invalid String";
         return new Duration({
             hours: segs[0] ?? 0,
             minutes: segs[1] ?? 0,
@@ -41,5 +41,12 @@ export class Duration {
 
     add(other: Duration) {
         return new Duration({ seconds: this._seconds + other._seconds });
+    }
+
+    /**
+     * Return something to compare by
+     */
+    compareBy(): number {
+        return this._seconds;
     }
 }
