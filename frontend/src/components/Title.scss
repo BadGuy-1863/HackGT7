@@ -36,6 +36,7 @@ $color: #ffffff;
         display: inline;
     }
     // .address-lookup {
+    $text-input-color: white;
     .search-box {
         padding: 40px;
         // display: inline !important;
@@ -43,7 +44,32 @@ $color: #ffffff;
         // background-color: rgba(black, 0.5);
         flex: 1;
         width: auto;
+        ::placeholder{
+            color:white;
+        }
+        .addressInput{
+            padding: 24px;
+            color: $text-input-color;
+            font-size: 24px;
+            outline: none;
+            width: 25vw;
+        }
+        .button {
+            background-color:#54B948;
+            padding: 17px 35px 21px 35px;
+            border-radius:1000px;
+            font-size: 24px;
+            font-weight: light; 
+            font-family: inherit;
+            color: white;
+            outline: none;
+            transition: ease 200ms;
+        }
+        .button:hover{
+            box-shadow: 0 6px 18px 0 rgba(#000, 0.4);
+            background-color: white;
+            color: #54B948;
+            cursor: pointer;
+        }
     }
-
-    // }
 }

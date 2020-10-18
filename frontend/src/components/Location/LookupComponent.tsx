@@ -28,14 +28,16 @@ export const AddressLookup = () => {
 
     return (
         <div className="address-form">
-            Alternatively, enter your current address:
+            {/* Alternatively, enter another address: */}
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
                     value={address}
                     onChange={handleChange}
+                    placeholder="Want food somewhere else?"
                     className="addressInput"
                 />
+                <br/>
                 <input type="submit" className="button" />
             </form>
         </div>

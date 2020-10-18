@@ -24,10 +24,8 @@ const Title = (props: any) => {
                 <h2>Lines are for losers.</h2>
             </div>
             <div className="search-box">
-                <br />
-                <div className="address-lookup">
-                    <Location />
-                </div>
+                {/* <br /> */}
+                <Location />
             </div>
         </div>
     );
