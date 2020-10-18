@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { Duration } from "../duration";
+import { Coordinates } from "./request-address";
 
 export interface Address {
     city: string;
@@ -13,12 +14,17 @@ interface APIStore {
     store_id: string;
     wait_time: string;
     address: Address;
+    coordinates: {
+        latitude: number;
+        longitude: number;
+    };
 }
 
 export interface Store {
     storeId: string;
     waitTime: Duration;
     address: Address;
+    coordinates: Coordinates;
 }
 
 interface Result {
@@ -30,6 +36,10 @@ const convertStore = (store: APIStore): Store => {
         storeId: store.store_id,
         address: store.address,
         waitTime: Duration.fromStr(store.wait_time),
+        coordinates: {
+            lat: store.coordinates.latitude,
+            lng: store.coordinates.longitude,
+        },
     };
 };
 
