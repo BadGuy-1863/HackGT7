@@ -23,7 +23,8 @@ def create_app(test_config=None):
         resp = requests.get(url, headers=headers, auth=('c1550d69-8a76-43ad-b0cf-1b3b06cc6546', '@8askate'))
         ids = [d['id'] for d in resp.json()['sites']]
         adds = [d['address'] for d in resp.json()['sites']]
-        return ids, adds
+        coords = [d['coordinates'] for d in resp.json()['sites']]
+        return ids, adds, coords
 
     def get_time(store_id):
 
@@ -73,11 +74,12 @@ def create_app(test_config=None):
     #sched.add_job(update_db,'interval',minutes=5)
     #sched.start()
 
-    def wait_time(store_id, add):
+    def wait_time(store_id, add, coord):
         return {
                 "store_id": store_id,
                 "wait_time": get_time(store_id),
-                "address": add
+                "address": add,
+                "coordinates":coord
         }
     @app.route("/")
     def index():
@@ -90,10 +92,10 @@ def create_app(test_config=None):
         lat = request.args.get('lat')
         lon = request.args.get('lon')
         rad = request.args.get('rad')
-        ids, adds = get_id_near(lat, lon, rad)
+        ids, adds, coords = get_id_near(lat, lon, rad)
         ret = []
         for k in range(len(ids)):
-            ret.append(wait_time(ids[k], adds[k]))
+            ret.append(wait_time(ids[k], adds[k], coords[k]))
         print(ret)
         return {'times':ret}
 
