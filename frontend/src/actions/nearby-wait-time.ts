@@ -86,70 +86,37 @@ const calculateDriveTime = async (
     start: Coordinates,
     dest: APIStore[]
 ): Promise<number[]> => {
-    // const baseUrl = "https://maps.googleapis.com/maps/api/distancematrix/json";
-    // const origin = `${start.lat},${start.lng}`;
+    const baseUrl = "https://maps.googleapis.com/maps/api/distancematrix/json";
+    const origin = `${start.lat},${start.lng}`;
 
-    // const destinations = dest
-    //     .map((st) => `${st.coordinates.latitude},${st.coordinates.longitude}`)
-    //     .join("|");
-    // const key = process.env.REACT_APP_GOOGLE_API_KEY;
+    const destinations = dest
+        .map((st) => `${st.coordinates.latitude},${st.coordinates.longitude}`)
+        .join("|");
+    const key = process.env.REACT_APP_GOOGLE_API_KEY;
 
-    // try {
-    //     const response = await axios.get(baseUrl, {
-    //         params: {
-    //             units: "imperial",
-    //             origins: origin,
-    //             key,
-    //             destinations,
-    //         },
-    //     });
+    try {
+        const response = await axios.get(baseUrl, {
+            params: {
+                units: "imperial",
+                origins: origin,
+                key,
+                destinations,
+            },
+        });
 
-    //     const values = response.data?.rows?.[0]?.elements ?? undefined;
-    //     if (values === undefined) {
-    //         console.error("Distances unable to be calculated");
-    //         return dest.map((d) => 0);
-    //     }
+        const values = response.data?.rows?.[0]?.elements ?? undefined;
+        if (values === undefined) {
+            console.error("Distances unable to be calculated");
+            return dest.map((d) => 0);
+        }
 
-    //     return values.map((res: any) =>
-    //         res.status === "OK" ? (res.distance.value as number) : 0
-    //     );
-    // } catch (e) {
-    //     console.error(e);
-    //     return dest.map((d) => 0);
-    // }
-
-    const { isLoaded, loadError } = useJsApiLoader({
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY!!,
-    });
-
-    if (!isLoaded) {
-        console.error(loadError);
+        return values.map((res: any) =>
+            res.status === "OK" ? (res.distance.value as number) : 0
+        );
+    } catch (e) {
+        console.error(e);
         return dest.map((d) => 0);
     }
-
-    const google = window.google;
-    const service = new google.maps.DistanceMatrixService();
-    return new Promise((resolve, reject) => {
-        const destinations = dest.map(
-            (st) => `${st.coordinates.latitude},${st.coordinates.longitude}`
-        );
-        service.getDistanceMatrix(
-            {
-                origins: [`${start.lat},${start.lng}`],
-                destinations,
-                travelMode: google.maps.TravelMode.DRIVING,
-            },
-            (response, status) => {
-                if (status !== "OK") {
-                    reject();
-                }
-
-                const destinations = response.rows[0].elements;
-                const times = destinations.map((dest) => dest.duration.value);
-                resolve(times);
-            }
-        );
-    });
 };
 
 /**
