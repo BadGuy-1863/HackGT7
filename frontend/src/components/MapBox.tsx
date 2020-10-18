@@ -3,6 +3,7 @@ import { Store } from "../actions/nearby-wait-time";
 import { Duration } from "../duration";
 import { MapsComponent } from "./MapBox/MapComponent";
 import ResultList from "./MapBox/ResultList";
+import { ResultContext } from "../contexts/result-context";
 import "./MapBox.scss";
 
 const MapBox = (props: any) => {
@@ -41,10 +42,12 @@ const MapBox = (props: any) => {
         },
     ];
 
+    const [results] = React.useContext(ResultContext);
+
     return (
         <div className="map-box">
             <MapsComponent />
-            <ResultList locations={data} />
+            <ResultList locations={results} />
         </div>
     );
 };
