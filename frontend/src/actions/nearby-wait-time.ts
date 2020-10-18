@@ -56,7 +56,7 @@ const queryBackend = async (
     longitude: number,
     radius: number
 ) => {
-    const url = "localhost:5000/times";
+    const url = "http://localhost:5000/times";
 
     try {
         const result: AxiosResponse<Result> = await axios.get(url, {
