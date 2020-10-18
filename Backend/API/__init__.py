@@ -19,7 +19,7 @@ def create_app(test_config=None):
          'nep-organization': '3feaeb2481a64df9b1953945990c7eae',
          'date': "2020-10-17T15:38:41.769Z"
         }
-        url = 'https://gateway-staging.ncrcloud.com/site/sites/find-nearby/%f,%f?radius=%d'%(float(lat), float(lon), int(rad))
+        url = 'https://gateway-staging.ncrcloud.com/site/sites/find-nearby/%f,%f?radius=%d'%(float(lat), float(lon), int(rad)*5280)
         resp = requests.get(url, headers=headers, auth=('c1550d69-8a76-43ad-b0cf-1b3b06cc6546', '@8askate'))
         ids = [d['id'] for d in resp.json()['sites']]
         adds = [d['address'] for d in resp.json()['sites']]
