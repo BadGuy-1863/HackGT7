@@ -20,6 +20,7 @@ export const AddressLookup = () => {
         if (c) {
             setLoc(c);
             const res = await waitTime(c.lat, c.lng, radius);
+
             setResults(res);
         }
     };
