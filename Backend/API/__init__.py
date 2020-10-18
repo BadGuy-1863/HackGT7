@@ -52,7 +52,7 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
 
     def update_time(store_id):
-        return str(datetime.timedelta(seconds = get_num_in_progress(store_id)*6))
+        return str(datetime.timedelta(seconds = get_num_in_progress(store_id)*208))
 
     def update_db():
         server = 'tcp:sqlserverhackgt72020.database.windows.net'
@@ -69,9 +69,9 @@ def create_app(test_config=None):
                     print(store_id)
                     cursor.execute("UPDATE Merchant SET QueueTime = '%s' WHERE Merchant_ID = '%s';"%(update_time(store_id), store_id))
 
-    sched = BackgroundScheduler(daemon=True)
-    sched.add_job(update_db,'interval',minutes=5)
-    sched.start()
+    #sched = BackgroundScheduler(daemon=True)
+    #sched.add_job(update_db,'interval',minutes=5)
+    #sched.start()
 
     def wait_time(store_id, add):
         return {
