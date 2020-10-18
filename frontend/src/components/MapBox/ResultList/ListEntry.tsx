@@ -9,7 +9,6 @@ interface Props {
 const ListEntry = ({ entry }: Props) => {
     return (
         <div className="list-entry">
-            <div>{"Store Name"}</div>
             <div>{entry.address.street}</div>
             <div>{entry.waitTime.toString()}</div>
         </div>
