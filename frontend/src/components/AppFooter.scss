@@ -1,0 +1,19 @@
+.footer {
+    background: #1d1d1d;
+    padding: 40px;
+    margin-top: 40px;
+
+    a {
+        text-decoration: none;
+        color: #efefef;
+    }
+    .powered-by {
+        margin-top: 10px;
+        color: #efefef;
+        vertical-align: middle;
+
+        img {
+            vertical-align: middle;
+        }
+    }
+}

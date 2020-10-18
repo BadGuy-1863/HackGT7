@@ -25,13 +25,14 @@ export interface Store {
     waitTime: Duration;
     address: Address;
     coordinates: Coordinates;
+    driveTime: Duration;
 }
 
 interface Result {
     times: APIStore[];
 }
 
-const convertStore = (store: APIStore): Store => {
+const convertStore = (store: APIStore, driveTime: number): Store => {
     return {
         storeId: store.store_id,
         address: store.address,
@@ -40,16 +41,17 @@ const convertStore = (store: APIStore): Store => {
             lat: store.coordinates.latitude,
             lng: store.coordinates.longitude,
         },
+        driveTime: new Duration({ seconds: driveTime }),
     };
 };
 
 /**
- * Searches backend for stores within {radius} miles of the given location
- * @param latitude The latitude
- * @param longitude The longitude
- * @param radius The radius to search in, in miles
+ * Searches for nearby restaurants and returns the wait times
+ * @param latitude the user's latitude
+ * @param longitude the user's longitude
+ * @param radius the radius to search in
  */
-export const waitTime = async (
+const queryBackend = async (
     latitude: number,
     longitude: number,
     radius: number
@@ -67,10 +69,78 @@ export const waitTime = async (
 
         const data = result.data;
 
-        const stores = data.times.map((st) => convertStore(st));
-        return stores;
+        return data.times;
     } catch (e) {
-        console.error("e");
+        console.error(e);
         throw "Failed to fetch from the API";
     }
+};
+
+/**
+ * Calculates driving time from start to various distances
+ * @param start The starting location
+ * @param dest The destination stores
+ */
+const calculateDriveTime = async (
+    start: Coordinates,
+    dest: APIStore[]
+): Promise<number[]> => {
+    const baseUrl = "https://maps.googleapis.com/maps/api/distancematrix/json";
+    const origin = `${start.lat},${start.lng}`;
+
+    const destinations = encodeURI(
+        dest
+            .map(
+                (st) => `${st.coordinates.latitude},${st.coordinates.longitude}`
+            )
+            .join("|")
+    );
+    const key = process.env.REACT_APP_GOOGLE_API_KEY;
+
+    try {
+        const response = await axios.get(baseUrl, {
+            params: {
+                units: "imperial",
+                origins: origin,
+                key,
+            },
+        });
+
+        const values = response.data?.rows?.[0]?.elements ?? undefined;
+        if (values === undefined) {
+            console.error("Distances unable to be calculated");
+            return dest.map((d) => 0);
+        }
+
+        return values.map((res: any) =>
+            res.status === "OK" ? (res.distance.value as number) : 0
+        );
+    } catch (e) {
+        console.error(e);
+        return dest.map((d) => 0);
+    }
+};
+
+/**
+ * Searches backend for stores within {radius} miles of the given location
+ * @param latitude The latitude
+ * @param longitude The longitude
+ * @param radius The radius to search in, in miles
+ */
+export const waitTime = async (
+    latitude: number,
+    longitude: number,
+    radius: number
+) => {
+    const storeLocations = await queryBackend(latitude, longitude, radius);
+    const driveTimes = await calculateDriveTime(
+        { lat: latitude, lng: longitude },
+        storeLocations
+    );
+
+    const stores = [];
+    for (let i = 0; i < storeLocations.length; i++) {
+        stores.push(convertStore(storeLocations[i], driveTimes[i]));
+    }
+    return stores;
 };

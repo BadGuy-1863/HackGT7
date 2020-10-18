@@ -8,12 +8,18 @@ interface Props {
 }
 
 const ResultList = ({ locations }: Props) => {
+    const emptyList = (
+        <div>Input your location to get a list of recommendations!</div>
+    );
+
     return (
         <div className="resultlist__container">
             <div className="resultlist">
                 {locations.map((loc) => (
                     <ListEntry entry={loc} key={loc.storeId} />
                 ))}
+
+                {locations.length === 0 && emptyList}
             </div>
         </div>
     );
