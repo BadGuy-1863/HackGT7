@@ -1,0 +1,28 @@
+$color : #FFFFFF;
+.title-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-image: url('../assets/lynn.png');
+    color: $color;
+    min-height: 100vh;
+    margin-left: auto;
+    h1 {
+        // position: relative;
+        // top: -100px;
+        font-weight: 500;
+        font-size: 180px;
+        margin-top: 100px;
+        margin-bottom: 20px;
+    }
+    h2 {
+        // position: relative;
+        // top: -200px;
+        font-weight: 300;
+        font-size: 40;
+        margin-top: 20px;
+    }
+    // .address-lookup {
+
+    // }
+}
