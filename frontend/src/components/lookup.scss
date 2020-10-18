@@ -1,0 +1,13 @@
+.addressInput {
+    background: rgba(white, 0);
+    border: none;
+    border-bottom: 2px solid lightblue;
+    min-width: 200;
+    color: #efefef;
+    text-align: center;
+
+    &:focus {
+        border-left: none;
+        width: 20%;
+    }
+}

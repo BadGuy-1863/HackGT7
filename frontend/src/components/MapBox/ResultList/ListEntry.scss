@@ -1,0 +1,8 @@
+.list-entry {
+    margin: 5px;
+    padding: 10px;
+    border-bottom: 1px solid black;
+    &:first-child {
+        border-top: 1px solid black;
+    }
+}

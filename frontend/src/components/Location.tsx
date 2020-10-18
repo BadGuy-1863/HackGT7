@@ -1,11 +1,12 @@
 import React from "react";
-import { Geolocation } from "../Location/Geolocation";
-import { AddressLookup } from "../Location/LookupComponent";
+import { Geolocation } from "./Location/Geolocation";
+import { AddressLookup } from "./Location/LookupComponent";
+import "./lookup.scss";
 export const Location = () => {
     return (
-        <div>
-            <AddressLookup />
+        <div className="location-search">
             <Geolocation />
+            <AddressLookup />
         </div>
     );
 };

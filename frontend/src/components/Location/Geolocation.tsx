@@ -1,5 +1,5 @@
 import React from "react";
-import { LocationContext } from "../contexts/location-context";
+import { LocationContext } from "../../contexts/location-context";
 
 export const Geolocation = () => {
     const [loc, setLoc] = React.useContext(LocationContext);
@@ -22,5 +22,9 @@ export const Geolocation = () => {
         );
     };
 
-    return <button onClick={handleClick}> Get Location </button>;
+    return (
+        <button className="button" onClick={handleClick}>
+            Use my Location!
+        </button>
+    );
 };
