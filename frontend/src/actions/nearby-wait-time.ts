@@ -86,7 +86,7 @@ const calculateDriveTime = async (
     dest: APIStore[]
 ): Promise<number[]> => {
     const baseUrl = "https://maps.googleapis.com/maps/api/distancematrix/json";
-    const origin = `${start.lat},${start.lng}`;
+    const origin = encodeURI(`${start.lat},${start.lng}`);
 
     const destinations = encodeURI(
         dest
@@ -103,6 +103,7 @@ const calculateDriveTime = async (
                 units: "imperial",
                 origins: origin,
                 key,
+                destinations,
             },
         });
 
