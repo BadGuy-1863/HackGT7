@@ -42,4 +42,11 @@ export class Duration {
     add(other: Duration) {
         return new Duration({ seconds: this._seconds + other._seconds });
     }
+
+    /**
+     * Return something to compare by
+     */
+    compareBy(): number {
+        return this._seconds;
+    }
 }

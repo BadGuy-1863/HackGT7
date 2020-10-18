@@ -21,6 +21,7 @@ const MapBox = (props: any) => {
                 lat: 34,
                 lng: -86,
             },
+            driveTime: new Duration({ minutes: 12 }),
         },
         {
             storeId: "2",
@@ -36,6 +37,7 @@ const MapBox = (props: any) => {
                 lat: 34,
                 lng: -86,
             },
+            driveTime: new Duration({ minutes: 10 }),
         },
     ];
 
