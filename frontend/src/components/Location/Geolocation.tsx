@@ -22,7 +22,11 @@ export const Geolocation = () => {
                     lng: position.coords.longitude,
                 });
 
-                const waitTimes = await waitTime(loc.lat, loc.lng, radius);
+                const waitTimes = await waitTime(
+                    position.coords.latitude,
+                    position.coords.longitude,
+                    radius
+                );
                 setResults(waitTimes);
 
                 // const results = await waitTime(position.coords.latitude, position.coords.longitude)
