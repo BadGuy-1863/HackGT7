@@ -21,7 +21,7 @@ const Title = (props: any) => {
         <div className="title-box">
             <div className="title">
                 <h1>Squiggle</h1>
-                <h2>Lines are for losers.</h2>
+                <h2>Because lines are for losers.</h2>
             </div>
             <div className="search-box">
                 {/* <br /> */}

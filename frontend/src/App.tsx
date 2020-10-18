@@ -20,7 +20,6 @@ function App() {
             <ResultContext.Provider value={[results, setResults]}>
                 <LocationContext.Provider value={[loc, setLoc]}>
                     <div className="App">
-                        <Title />
                         <Switch>
                             <Route path="/terms">
                                 <Terms />
@@ -29,6 +28,7 @@ function App() {
                                 <About />
                             </Route>
                             <Route path="/">
+                                <Title />
                                 <MapBox />
                                 <AppFooter />
                             </Route>

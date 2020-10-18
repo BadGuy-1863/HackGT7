@@ -1,0 +1,19 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 450px;
+    margin: 20px;
+    
+    .name {
+        font-size: xx-large;
+        font-weight: bold;
+    }
+    img {
+        border-radius: 80px;
+        object-fit: cover;
+        width: 350px;
+        height: 350px;
+    }
+
+}
