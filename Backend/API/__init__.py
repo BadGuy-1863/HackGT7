@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+from flask_cors import CORS, cross_origin
 import pyodbc
 import requests
 import datetime
@@ -53,19 +54,8 @@ def create_app(test_config=None):
         return [o['enterpriseUnitId'] for o in resp.json()['orders']].count(store_id)
 
     app = Flask(__name__, instance_relative_config=True)
-
-    means = {}
-    def init_means(store_id):
-        headers = {
-         'content-type': 'application/json',
-         'nep-organization': '3feaeb2481a64df9b1953945990c7eae',
-         'nep-enterprise-unit': store_id,
-         'date': "2020-10-17T15:38:41.769Z"
-        }
-        payload = "{\n    \"criteria\": {\n       \"status\": \"Finished\"\n, \"enterpriseUnitID\": \"%s\"\n     },\n    \"operator\": \"AND\",\n    \"pageStart\": 0,\n    \"pageSize\": 100\n}"%str(store_id)
-        url = 'https://gateway-staging.ncrcloud.com/order/orders/find'
-        resp = requests.request("POST",url, headers=headers, auth=('c1550d69-8a76-43ad-b0cf-1b3b06cc6546', '@8askate'), data = payload)
-        means[str(store_id)] = 5
+    cors = CORS(app)
+    app.config['CORS_HEADERS'] = 'Content-Type'
 
     def update_time(store_id):
         return str(datetime.timedelta(seconds = get_num_in_progress(store_id)*208))
@@ -102,6 +92,7 @@ def create_app(test_config=None):
 
 
     @app.route("/times", methods=["GET"])
+    @cross_origin()
     def times():
         lat = request.args.get('lat')
         lon = request.args.get('lon')
