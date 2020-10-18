@@ -70,9 +70,9 @@ def create_app(test_config=None):
                     print(store_id)
                     cursor.execute("UPDATE Merchant SET QueueTime = '%s' WHERE Merchant_ID = '%s';"%(update_time(store_id), store_id))
 
-    #sched = BackgroundScheduler(daemon=True)
-    #sched.add_job(update_db,'interval',minutes=5)
-    #sched.start()
+    sched = BackgroundScheduler(daemon=True)
+    sched.add_job(update_db,'interval',minutes=5)
+    sched.start()
 
     def wait_time(store_id, add, coord):
         return {
